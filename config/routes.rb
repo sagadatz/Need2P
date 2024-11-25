@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'categories/index'
+  get 'reviews/create'
+  get 'users/new'
+  get 'users/create'
+  get 'users/show'
+  get 'toilets/index'
+  get 'toilets/show'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
