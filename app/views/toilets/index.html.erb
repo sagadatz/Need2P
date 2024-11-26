@@ -1,2 +1,168 @@
-<h1>Toilets#index</h1>
-<p>Find me in app/views/toilets/index.html.erb</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toilet Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .bg-primary-dark {
+            background-color: #1e3a8a;
+        }
+        .map-container {
+            height: 300px;
+            background-color: #e2e8f0;
+        }
+        .status-legend {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .status-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+        .badge-female-friendly {
+            background-color: #ec4899;
+        }
+        .badge-clean {
+            background-color: #22c55e;
+        }
+        .badge-paid {
+            background-color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary-dark text-white py-3">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <button class="btn btn-link text-white"><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link text-white"><i class="fas fa-user"></i></button>
+        </div>
+    </header>
+
+    <div class="map-container position-relative">
+        <!-- Map will be integrated here -->
+        <div class="status-legend">
+            <h6 class="fw-bold mb-2">Status Legend</h6>
+            <div><span class="status-dot bg-success"></span>Available</div>
+            <div><span class="status-dot bg-danger"></span>Unavailable</div>
+            <div><span class="status-dot bg-warning"></span>Unknown</div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row g-2">
+            <div class="col">
+                <input type="search" class="form-control" placeholder="Search">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-outline-primary"><i class="fas fa-filter"></i></button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-outline-primary"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Pergamonmuseum Toilet</h5>
+                            <p class="card-text text-muted">0.2 km</p>
+                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <span class="badge badge-clean text-white">Clean</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Monbijou Public Toilet</h5>
+                            <p class="card-text text-muted">0.5 km</p>
+                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <span class="badge badge-clean text-white">Clean</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <span>4.2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Telegraphenamt Toilet</h5>
+                            <p class="card-text text-muted">0.6 km</p>
+                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <span class="badge badge-clean text-white">Clean</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Starbucks Toilet</h5>
+                            <p class="card-text text-muted">1.1 km</p>
+                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <span class="badge badge-paid text-white">Paid Entry</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Humboldt Forum Toilet</h5>
+                            <p class="card-text text-muted">1.2 km</p>
+                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <span class="badge badge-clean text-white">Clean</span>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
