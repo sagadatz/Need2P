@@ -7,3 +7,30 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Toilet.destroy_all
+User.destroy_all
+
+# Create 4 users
+users = []
+4.times do |i|
+  users << User.create!(
+    email: "user#{i + 1}@example.com",
+    password: "password",
+    password_confirmation: "password"
+  )
+end
+
+# Create 20 toilets
+20.times do |i|
+  Toilet.create!(
+    name: "Toilet #{i + 1}",
+    #description: "This is a description of Toilet #{i + 1}.",
+    location: "Address #{i + 1}, Berlin",
+    latitude: 52.5 + rand(-0.05..0.05),  # Random latitude near Berlin
+    longitude: 13.4 + rand(-0.05..0.05), # Random longitude near Berlin
+    #Use geocoder for lng lat!
+    user: users.sample                  # Randomly assign a user as the owner
+  )
+end
+
+puts "Seeded #{User.count} users and #{Toilet.count} toilets!"
