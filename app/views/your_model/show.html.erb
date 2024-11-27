@@ -1,0 +1,21 @@
+<!-- ... existing content ... -->
+<div id="map" style="width: 100%; height: 600px;"></div>
+
+<script>
+mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11',
+  center: [<%= @model.longitude %>, <%= @model.latitude %>],
+  zoom: 12 // Closer zoom for single location
+});
+
+new mapboxgl.Marker()
+  .setLngLat([ <%= @model.longitude %>, <%= @model.latitude %> ])
+  .setPopup(
+    new mapboxgl.Popup({ offset: 25 })
+      .setHTML('<%= render_to_string(partial: "info_window", locals: { model: @model }).gsub(/\n/, "") %>')
+  )
+  .addTo(map);
+</script>
