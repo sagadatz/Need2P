@@ -13,6 +13,7 @@ class ToiletsController < ApplicationController
   end
 
   def index
+    @toilets = Toilet.all
   end
 
   def show
