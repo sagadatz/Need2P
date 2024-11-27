@@ -178,5 +178,30 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ... existing content ... -->
+<div id="map" style="width: 100%; height: 600px;"></div>
+
+<script>
+mapboxgl.accessToken = '<%= Rails.application.credentials.mapbox[:api_key] %>';
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11',
+  center: [0, 0], // Default center coordinates [longitude, latitude]
+  zoom: 2 // Default zoom level
+});
+
+const markers = <%= @markers.to_json.html_safe %>;
+
+markers.forEach((marker) => {
+  new mapboxgl.Marker()
+    .setLngLat([ marker.lng, marker.lat ])
+    .setPopup(
+      new mapboxgl.Popup({ offset: 25 })
+        .setHTML(marker.info_window)
+    )
+    .addTo(map);
+});
+</script>
 </body>
 </html>
