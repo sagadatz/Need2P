@@ -61,9 +61,9 @@
     </style>
 </head>
 <body>
-    <div class="modal-sheet">
+    <div class="">
         <div class="container py-4">
-            <a class="btn close-button" href="/" role="button"> <i class="fas fa-times"></i></a>
+            <a class="btn close-button" href="/" role="button"> <i class="fas fa-times" style="margin-top: 100px"></i></a>
             <h1 class="h2 mb-3">Pergamonmuseum Toilet</h1>
 
             <p class="text-muted">
@@ -204,33 +204,5 @@
             </section>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-    </script>
-<!-- ... existing content ... -->
-<div id="map" style="width: 100%; height: 600px;"></div>
-
-<script>
-mapboxgl.accessToken = '<%= Rails.application.credentials.mapbox[:api_key] %>';
-
-const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11',
-  center: [<%= @model.longitude %>, <%= @model.latitude %>],
-  zoom: 12 // Closer zoom for single location
-});
-
-new mapboxgl.Marker()
-  .setLngLat([ <%= @model.longitude %>, <%= @model.latitude %> ])
-  .setPopup(
-    new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<%= render_to_string(partial: "info_window", locals: { model: @model }).gsub(/\n/, "") %>')
-  )
-  .addTo(map);
-</script>
-<div class="map-info-window">
-  <h2><%= model.name %></h2>
-  <p><%= model.description %></p>
-</div>
 </body>
 </html>
