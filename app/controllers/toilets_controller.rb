@@ -13,7 +13,20 @@ class ToiletsController < ApplicationController
   end
 
   def index
+
     @toilets = Toilet.all
+
+    @markers = @toilets.map do |toilet|
+      {
+        lat: toilet.latitude,
+        lng: toilet.longitude,
+        info_window: render_to_string(
+          partial: "info_window",
+          locals: { toilet: toilet }
+        )
+      }
+    end
+
   end
 
   def show
