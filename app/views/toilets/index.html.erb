@@ -39,12 +39,32 @@
         .badge-paid {
             background-color: #6b7280;
         }
+        .badge-flinta-friendly {
+          background-color: #b833ff;
+        }
+        .badge-handycap-friendly {
+          background-color: #33d7ff;
+        }
+        .badge-family-bathroom {
+          background-color: #ffac33;
+        }
+        .btn-link {
+          background-color: #1e3a8a;
+        }
     </style>
 </head>
 <body>
     <header class="bg-primary-dark text-white py-3">
         <div class="container-fluid d-flex justify-content-between align-items-center">
-            <button class="btn btn-link text-white"><i class="fas fa-bars"></i></button>
+            <%# <button class="dropbtn btn-link text-white"><i class="fas fa-bars"></i></button> %>
+              <div class="dropdown">
+                <button class="dropbtn btn-link text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
             <button class="btn btn-link text-white"><i class="fas fa-user"></i></button>
         </div>
     </header>
@@ -80,8 +100,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title">Pergamonmuseum Toilet</h5>
+                            <h5 class="card-title"><%=Toilet.all[0].name%></h5>
                             <p class="card-text text-muted">0.2 km</p>
+                            <a href="/toilets/0" class=" stretched-link"></a>
                             <span class="badge badge-female-friendly text-white">Female-Friendly</span>
                             <span class="badge badge-clean text-white">Clean</span>
                         </div>
@@ -97,9 +118,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title">Monbijou Public Toilet</h5>
+                            <h5 class="card-title"><%=Toilet.all[1].name%></h5>
                             <p class="card-text text-muted">0.5 km</p>
-                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <a href="/toilets/1" class=" stretched-link"></a>
+                            <span class="badge badge-family-bathroom text-white">Family-Bathroom</span>
                             <span class="badge badge-clean text-white">Clean</span>
                         </div>
                         <div class="text-warning">
@@ -114,9 +136,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title">Telegraphenamt Toilet</h5>
+                            <h5 class="card-title"><%=Toilet.all[2].name%></h5>
                             <p class="card-text text-muted">0.6 km</p>
-                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <a href="/toilets/2" class=" stretched-link"></a>
+                            <span class="badge badge-flinta-friendly text-white">FLINTA-Friendly</span>
                             <span class="badge badge-clean text-white">Clean</span>
                         </div>
                         <div class="text-warning">
@@ -131,8 +154,9 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title">Starbucks Toilet</h5>
+                            <h5 class="card-title"><%=Toilet.all[3].name%></h5>
                             <p class="card-text text-muted">1.1 km</p>
+                            <a href="/toilets/3" class=" stretched-link"></a>
                             <span class="badge badge-female-friendly text-white">Female-Friendly</span>
                             <span class="badge badge-paid text-white">Paid Entry</span>
                         </div>
@@ -148,9 +172,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h5 class="card-title">Humboldt Forum Toilet</h5>
+                            <h5 class="card-title"><%=Toilet.all[4].name%></h5>
                             <p class="card-text text-muted">1.2 km</p>
-                            <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                            <a href="/toilets/4" class=" stretched-link"></a>
+                            <span class="badge badge-handycap-friendly text-white">Handycap-Friendly</span>
                             <span class="badge badge-clean text-white">Clean</span>
                         </div>
                         <div class="text-warning">
