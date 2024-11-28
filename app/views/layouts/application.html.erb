@@ -15,29 +15,51 @@
   </head>
 
   <body><%= render "shared/navbar" %>
-  <header class="bg-primary-dark text-white py-3">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-      <div class="dropdown">
-        <button class="btn btn-dropdown text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-bars"></i>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="/">Home</a></li>
-          <li><a class="dropdown-item" href="#">About</a></li>
-          <li><a class="dropdown-item" href="#">Report Issue</a></li>
-        </ul>
-      </div>
-      <a href="https://www.example.com">
-        <button class="btn btn-link text-white">
-          <i class="fas fa-user"></i>
-        </button>
-      </a>
+    <!-- Hamburger-Button (Jetzt benutzt dein fa-bars-Icon) -->
+    <span class="open-btn" onclick="openSidebar()">&#9776;</span>
+
+    <!-- Sidebar -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Report Issue</a>
     </div>
-  </header>
-  <%= render "shared/flashes" %>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Hauptinhalt -->
+    <div id="mainContent" class="content">
+      <header class="navbar navbar-custom text-white py-3">
+        <div class="container-fluid d-flex justify-content-end align-items-center">
+          <!-- Profil Icon auf der rechten Seite -->
+          <%= link_to dashboard_path do  %>
+            <button class="btn btn-link text-white">
+                <i class="fas fa-user"></i>
+            </button>
+          <% end %>
+        </div>
+      </header>
+    </div>
+
+    <script>
+        function openSidebar() {
+            document.getElementById("mySidebar").classList.add("open");
+            document.getElementById("mainContent").style.marginLeft = "250px";
+            document.getElementById("overlay").classList.add("open");
+        }
+
+        function closeSidebar() {
+            document.getElementById("mySidebar").classList.remove("open");
+            document.getElementById("mainContent").style.marginLeft = "0";
+            document.getElementById("overlay").classList.remove("open");
+        }
+    </script>
+
+    <%= render "shared/flashes" %>
 
     <%= yield %>
-
   </body>
 
 </html>
