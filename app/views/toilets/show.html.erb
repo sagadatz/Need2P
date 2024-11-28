@@ -1,208 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toilet Details - Toilet Finder</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .modal-sheet {
-            background: white;
-            height: 100vh;
-            width: 100vw;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1050;
-            overflow-y: auto;
-        }
-        .map-preview {
-            width: 100%;
-            height: 200px;
-            background-color: #e2e8f0;
-            margin: 1rem 0;
-        }
-        .toilet-images {
-            display: flex;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .toilet-images img {
-            width: 150px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .star-rating {
-            color: #fbbf24;
-        }
-        .review-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        .feature-checkboxes {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-        .close-button {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="">
-        <div class="container py-4">
-            <a class="btn close-button" href="/" role="button"> <i class="fas fa-times" style="margin-top: 100px"></i></a>
-            <h1 class="h2 mb-3">Pergamonmuseum Toilet</h1>
+<div class="">
+    <div class="container py-4">
+        <a class="btn close-button" href="/" role="button"> <i class="fas fa-times" style="margin-top: 100px"></i></a>
+        <h1 class="h2 mb-3">Pergamonmuseum Toilet</h1>
 
-            <p class="text-muted">
-                Clean public restroom located in Pergamonmuseum. Accessible and well-maintained.
-            </p>
+        <p class="text-muted">
+            Clean public restroom located in Pergamonmuseum. Accessible and well-maintained.
+        </p>
 
-            <div id="carouselExample" class="carousel slide">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+        <div class="map-preview" aria-label="Location map">
+            <!-- Map will be integrated here -->
+        </div>
+
+        <button class="btn btn-primary w-100 mb-4">
+            Navigate to this toilet
+        </button>
+
+        <section class="mb-4">
+            <h2 class="h4 mb-3">User Reviews</h2>
+
+            <div class="review-card">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0">The Peemaster</h3>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <span>4.5</span>
+                    </div>
                 </div>
-                <div class="carousel-item">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
+                <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
             </div>
 
-            <div class="map-preview" aria-label="Location map">
-                <!-- Map will be integrated here -->
+            <div class="review-card">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0">Nomad</h3>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <span>3.2</span>
+                    </div>
+                </div>
+                <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
             </div>
 
-            <button class="btn btn-primary w-100 mb-4">
-                Navigate to this toilet
+            <div class="review-card">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="h6 mb-0">The Peemaster</h3>
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <span>5.0</span>
+                    </div>
+                </div>
+                <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
+            </div>
+        </section>
+
+        <section class="mb-4">
+            <h2 class="h4 mb-3">Leave a Review</h2>
+
+            <div class="star-rating mb-3">
+                <button class="btn btn-link p-0 me-1" aria-label="Rate 1 star">
+                    <i class="far fa-star"></i>
+                </button>
+                <button class="btn btn-link p-0 me-1" aria-label="Rate 2 stars">
+                    <i class="far fa-star"></i>
+                </button>
+                <button class="btn btn-link p-0 me-1" aria-label="Rate 3 stars">
+                    <i class="far fa-star"></i>
+                </button>
+                <button class="btn btn-link p-0 me-1" aria-label="Rate 4 stars">
+                    <i class="far fa-star"></i>
+                </button>
+                <button class="btn btn-link p-0" aria-label="Rate 5 stars">
+                    <i class="far fa-star"></i>
+                </button>
+            </div>
+
+            <textarea
+                class="form-control mb-3"
+                rows="4"
+                placeholder="Write your review here..."
+                aria-label="Review text"
+            ></textarea>
+
+            <div class="feature-checkboxes">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="clean">
+                    <label class="form-check-label" for="clean">Clean</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="dirty">
+                    <label class="form-check-label" for="dirty">Dirty</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="accessible">
+                    <label class="form-check-label" for="accessible">Accessible</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="paid-entry">
+                    <label class="form-check-label" for="paid-entry">Paid Entry</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="female-friendly">
+                    <label class="form-check-label" for="female-friendly">Female-Friendly</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="well-located">
+                    <label class="form-check-label" for="well-located">Well Located</label>
+                </div>
+            </div>
+
+            <button class="btn btn-outline-primary w-100 mb-3">
+                <i class="fas fa-camera me-2"></i>
+                Add Photos
             </button>
 
-            <section class="mb-4">
-                <h2 class="h4 mb-3">User Reviews</h2>
-
-                <div class="review-card">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h3 class="h6 mb-0">The Peemaster</h3>
-                        <div class="star-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.5</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h3 class="h6 mb-0">Nomad</h3>
-                        <div class="star-rating">
-                            <i class="fas fa-star"></i>
-                            <span>3.2</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
-                </div>
-
-                <div class="review-card">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h3 class="h6 mb-0">The Peemaster</h3>
-                        <div class="star-rating">
-                            <i class="fas fa-star"></i>
-                            <span>5.0</span>
-                        </div>
-                    </div>
-                    <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
-                </div>
-            </section>
-
-            <section class="mb-4">
-                <h2 class="h4 mb-3">Leave a Review</h2>
-
-                <div class="star-rating mb-3">
-                    <button class="btn btn-link p-0 me-1" aria-label="Rate 1 star">
-                        <i class="far fa-star"></i>
-                    </button>
-                    <button class="btn btn-link p-0 me-1" aria-label="Rate 2 stars">
-                        <i class="far fa-star"></i>
-                    </button>
-                    <button class="btn btn-link p-0 me-1" aria-label="Rate 3 stars">
-                        <i class="far fa-star"></i>
-                    </button>
-                    <button class="btn btn-link p-0 me-1" aria-label="Rate 4 stars">
-                        <i class="far fa-star"></i>
-                    </button>
-                    <button class="btn btn-link p-0" aria-label="Rate 5 stars">
-                        <i class="far fa-star"></i>
-                    </button>
-                </div>
-
-                <textarea
-                    class="form-control mb-3"
-                    rows="4"
-                    placeholder="Write your review here..."
-                    aria-label="Review text"
-                ></textarea>
-
-                <div class="feature-checkboxes">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="clean">
-                        <label class="form-check-label" for="clean">Clean</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="dirty">
-                        <label class="form-check-label" for="dirty">Dirty</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="accessible">
-                        <label class="form-check-label" for="accessible">Accessible</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="paid-entry">
-                        <label class="form-check-label" for="paid-entry">Paid Entry</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="female-friendly">
-                        <label class="form-check-label" for="female-friendly">Female-Friendly</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="well-located">
-                        <label class="form-check-label" for="well-located">Well Located</label>
-                    </div>
-                </div>
-
-                <button class="btn btn-outline-primary w-100 mb-3">
-                    <i class="fas fa-camera me-2"></i>
-                    Add Photos
-                </button>
-
-                <button class="btn btn-primary w-100">
-                    <i class="fas fa-upload me-2"></i>
-                    Upload
-                </button>
-            </section>
-        </div>
+            <button class="btn btn-primary w-100">
+                <i class="fas fa-upload me-2"></i>
+                Upload
+            </button>
+        </section>
     </div>
-</body>
-</html>
+</div>
