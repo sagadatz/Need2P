@@ -6,7 +6,8 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    source: String
   }
 
   connect() {
@@ -17,11 +18,11 @@ export default class extends Controller {
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
-
+    if (this.sourceValue === "index") {
     this.map.addControl(new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl
-    }))
+    }))}
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
   }

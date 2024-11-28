@@ -28,6 +28,11 @@ class ToiletsController < ApplicationController
   end
 
   def show
+    @toilet = Toilet.find(params[:id])
+    @markers = [{
+      lat: @toilet.latitude,
+      lng: @toilet.longitude
+    }]
   end
 
   private
