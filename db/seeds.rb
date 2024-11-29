@@ -12,25 +12,27 @@
 
 # Destroy all existing data to start fresh
 
+Review.destroy_all
 Toilet.destroy_all
 User.destroy_all
-Review.destroy_all
 
 # Create 4 users
 
 users = []
 4.times do |i|
   users << User.create!(
-    email: "user#{i + 1}@example.com",
+    name: "User #{i + 1}",
+    username: "user#{i + 1}",
+    email: "user#{i + 1}@lol.com",
     password: "password",
     password_confirmation: "password"
   )
 end
 
-user1 = User.create!(email: "user1@example.com", password: "password", password_confirmation: "password")
-user2 = User.create!(email: "user2@example.com", password: "password", password_confirmation: "password")
-user3 = User.create!(email: "user3@example.com", password: "password", password_confirmation: "password")
-user4 = User.create!(email: "user4@example.com", password: "password", password_confirmation: "password")
+user1 = User.create!(username: "John Wick", name: "John Wick", email: "user1@example.com", password: "password", password_confirmation: "password")
+user2 = User.create!(username: "Jane Doe", name: "Jane Doe", email: "user2@example.com", password: "password", password_confirmation: "password")
+user3 = User.create!(username: "Bob Smith", name: "Bob Smith", email: "user3@example.com", password: "password", password_confirmation: "password")
+user4 = User.create!(username: "Alice Johnson", name: "Alice Johnson", email: "user4@example.com", password: "password", password_confirmation: "password")
 
 
 # Spooky toilet names
