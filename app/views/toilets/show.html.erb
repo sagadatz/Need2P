@@ -62,104 +62,204 @@
         <section class="mb-4">
             <h2 class="h4 mb-3">User Reviews</h2>
 
-            <div class="review-card">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3 class="h6 mb-0">The Peemaster</h3>
-                    <div class="star-rating">
-                        <i class="fas fa-star"></i>
-                        <span>4.5</span>
-                    </div>
-                </div>
-                <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
-            </div>
+            <style>
+              .reviews-container {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;  /* Space between reviews */
+                margin: 20px 0;
+              }
 
-            <div class="review-card">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3 class="h6 mb-0">Nomad</h3>
-                    <div class="star-rating">
-                        <i class="fas fa-star"></i>
-                        <span>3.2</span>
-                    </div>
-                </div>
-                <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
-            </div>
+              .review {
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 15px;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+              }
 
-            <div class="review-card">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h3 class="h6 mb-0">The Peemaster</h3>
-                    <div class="star-rating">
-                        <i class="fas fa-star"></i>
-                        <span>5.0</span>
+              .review .rating {
+                margin-bottom: 10px;
+                color: #ffd700;  /* Gold color for stars */
+              }
+
+              .review p {
+                margin: 10px 0;
+                line-height: 1.5;
+              }
+
+              .review small {
+                color: #666;
+                display: block;
+                margin-top: 10px;
+              }
+            </style>
+
+            <div class="reviews-container">
+              <% @toilet.reviews.each do |review| %>
+                <div class="review">
+                  <div class="rating">
+                    <% if review.rating %>
+                      <%= "★" * review.rating %>
+                      <%= "☆" * (5 - review.rating) %>
+                    <% else %>
+                      <%= "☆" * 5 %>
+                    <% end %>
+                  </div>
+
+                  <div class="categories-grid">
+                    <div class="category">
+                      <i class="fas fa-broom"></i>
+                      <span>Cleanliness: <%= "★" * review.dirty %><%= "☆" * (5 - review.dirty) %></span>
                     </div>
+                    <div class="category">
+                      <i class="fas fa-wheelchair"></i>
+                      <span>Accessibility: <%= "★" * review.accessible %><%= "☆" * (5 - review.accessible) %></span>
+                    </div>
+                    <div class="category">
+                      <i class="fas fa-euro-sign"></i>
+                      <span>Paid Entry: <%= "★" * review.paid_entry %><%= "☆" * (5 - review.paid_entry) %></span>
+                    </div>
+                    <div class="category">
+                      <i class="fas fa-female"></i>
+                      <span>Female Friendly: <%= "★" * review.female_friendly %><%= "☆" * (5 - review.female_friendly) %></span>
+                    </div>
+                    <div class="category">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <span>Location: <%= "★" * review.well_located %><%= "☆" * (5 - review.well_located) %></span>
+                    </div>
+                  </div>
+
+                  <p><%= review.content %></p>
+                  <small>By: <%= review.user.name || review.user.email || "Anonymous" %> - <%= time_ago_in_words(review.created_at) %> ago</small>
                 </div>
-                <p class="mb-0">Clean and spacious! Even classical music was playing. Awesome!</p>
+              <% end %>
             </div>
         </section>
 
         <section class="mb-4">
             <h2 class="h4 mb-3">Leave a Review</h2>
 
-            <div class="star-rating mb-3">
-                <button class="btn btn-link p-0 me-1" aria-label="Rate 1 star">
-                    <i class="far fa-star"></i>
-                </button>
-                <button class="btn btn-link p-0 me-1" aria-label="Rate 2 stars">
-                    <i class="far fa-star"></i>
-                </button>
-                <button class="btn btn-link p-0 me-1" aria-label="Rate 3 stars">
-                    <i class="far fa-star"></i>
-                </button>
-                <button class="btn btn-link p-0 me-1" aria-label="Rate 4 stars">
-                    <i class="far fa-star"></i>
-                </button>
-                <button class="btn btn-link p-0" aria-label="Rate 5 stars">
-                    <i class="far fa-star"></i>
-                </button>
-            </div>
+            <%= form_with(model: [@toilet, @review], local: true) do |f| %>
+                <div class="rating-container">
+                    <div class="stars">
+                        <% 5.times do |i| %>
+                            <span class="star" data-rating="<%= i + 1 %>">☆</span>
+                        <% end %>
+                    </div>
+                    <%= f.hidden_field :rating, id: 'rating-input' %>
+                </div>
 
-            <textarea
-                class="form-control mb-3"
-                rows="4"
-                placeholder="Write your review here..."
-                aria-label="Review text"
-            ></textarea>
+                <%= f.text_area :content,
+                    class: "form-control mb-3",
+                    rows: 4,
+                    placeholder: "Write your review here...",
+                    required: true %>
 
-            <div class="feature-checkboxes">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="clean">
-                    <label class="form-check-label" for="clean">Clean</label>
+                <div class="feature-checkboxes mb-3">
+                    <div class="form-check">
+                        <%= f.check_box :clean, class: "form-check-input" %>
+                        <%= f.label :clean, class: "form-check-label" %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.check_box :dirty, class: "form-check-input" %>
+                        <%= f.label :dirty, class: "form-check-label" %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.check_box :accessible, class: "form-check-input" %>
+                        <%= f.label :accessible, class: "form-check-label" %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.check_box :paid_entry, class: "form-check-input" %>
+                        <%= f.label :paid_entry, "Paid Entry", class: "form-check-label" %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.check_box :female_friendly, class: "form-check-input" %>
+                        <%= f.label :female_friendly, "Female-Friendly", class: "form-check-label" %>
+                    </div>
+                    <div class="form-check">
+                        <%= f.check_box :well_located, class: "form-check-input" %>
+                        <%= f.label :well_located, "Well Located", class: "form-check-label" %>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="dirty">
-                    <label class="form-check-label" for="dirty">Dirty</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="accessible">
-                    <label class="form-check-label" for="accessible">Accessible</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="paid-entry">
-                    <label class="form-check-label" for="paid-entry">Paid Entry</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="female-friendly">
-                    <label class="form-check-label" for="female-friendly">Female-Friendly</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="well-located">
-                    <label class="form-check-label" for="well-located">Well Located</label>
-                </div>
-            </div>
 
-            <button class="btn btn-outline-primary w-100 mb-3">
-                <i class="fas fa-camera me-2"></i>
-                Add Photos
-            </button>
-
-            <button class="btn btn-primary w-100">
-                <i class="fas fa-upload me-2"></i>
-                Upload
-            </button>
+                <%= f.submit "Submit Review", class: "btn btn-primary w-100" %>
+            <% end %>
         </section>
     </div>
 </div>
+
+<style>
+  .stars {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .star {
+    color: #ddd;
+    transition: color 0.2s;
+  }
+  .star.active {
+    color: #ffd700;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  .category {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+  }
+
+  .category i {
+    width: 20px;
+    color: #666;
+  }
+
+  .category span {
+    font-size: 0.9em;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const stars = document.querySelectorAll('.star');
+  const ratingInput = document.getElementById('rating-input');
+
+  function setRating(rating) {
+    stars.forEach((star, index) => {
+      star.textContent = index < rating ? '★' : '☆';
+      star.classList.toggle('active', index < rating);
+    });
+    ratingInput.value = rating;
+  }
+
+  stars.forEach(star => {
+    star.addEventListener('mouseover', function() {
+      const rating = this.dataset.rating;
+      stars.forEach((s, index) => {
+        s.textContent = index < rating ? '★' : '☆';
+      });
+    });
+
+    star.addEventListener('mouseout', function() {
+      const currentRating = ratingInput.value || 0;
+      stars.forEach((s, index) => {
+        s.textContent = index < currentRating ? '★' : '☆';
+      });
+    });
+
+    star.addEventListener('click', function() {
+      const rating = this.dataset.rating;
+      setRating(rating);
+    });
+  });
+});
+</script>

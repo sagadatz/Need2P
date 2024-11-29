@@ -57,6 +57,11 @@ spooky_toilets = [
   "The Forbidden Flush"
 ]
 
+class AddCleanToReviews < ActiveRecord::Migration[7.0]
+  def change
+    add_column :reviews, :clean, :integer
+  end
+end
 
 # Create toilets with associations
 spooky_toilets.each_with_index do |toilet_name, i|
@@ -68,7 +73,6 @@ spooky_toilets.each_with_index do |toilet_name, i|
     user: users.sample                  # Randomly assign a user as the owner
   )
 end
-
 
 puts "Seeded #{User.count} users, #{Toilet.count} spooky toilet."
 
@@ -137,4 +141,3 @@ toilet20 = Toilet.create!(name: spooky_toilets[19], location: "Spooky Address 20
 Review.create!(title: "Review for #{toilet20.name}", content: "This is a review for the spooky toilet #{toilet20.name}. It's eerie but functional!", rating: rand(1..5), user: user4, toilet: toilet20)
 
 puts "Seeded #{User.count} users, #{Toilet.count} toilets, and #{Review.count} reviews."
-
