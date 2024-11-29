@@ -31,12 +31,28 @@
 
         <div class="map-preview" aria-label="Location map">
             <!-- Map will be integrated here -->
+    <div class="map-container position-relative">
+        <div style="width: 100%; height: 100%;"
+          data-controller="map"
+          data-map-markers-value="<%= @markers.to_json %>"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY']%>"
+          data-map-source-value="show"></div>
+        <div class="status-legend">
+            <h6 class="fw-bold mb-2">Status Legend</h6>
+            <div><span class="status-dot bg-success"></span>Available</div>
+            <div><span class="status-dot bg-danger"></span>Unavailable</div>
+            <div><span class="status-dot bg-warning"></span>Unknown</div>
         </div>
+    </div>
 
         <button
           class="btn btn-primary w-100 mb-4"
           onclick="navigateToToilet(<%= @toilet.latitude %>, <%= @toilet.longitude %>)">
           Navigate to this toilet
+
+        <button class="btn btn-primary w-100 mb-4 navigate-button">
+            Navigate to this toilet
+
         </button>
 
 

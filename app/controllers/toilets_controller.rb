@@ -13,30 +13,33 @@ class ToiletsController < ApplicationController
   end
 
   def index
-
     @toilets = Toilet.all
-
-    # @markers = @toilets.map do |toilet|
-    #   {
-    #     lat: toilet.latitude,
-    #     lng: toilet.longitude,
-    #     info_window: render_to_string(
-    #       partial: "info_window",
-    #       locals: { toilet: toilet }
-    #     )
-    #   }
-    # end
-
-  end
-
-  def show
+    @markers = @toilets.geocoded.map do |toilet|
+      {
+        lat: toilet.latitude,
+        lng: toilet.longitude,
+        #info_window_html: render_to_string(
+          #partial: "info_window",
+          #locals: { toilet: toilet }
+        #),
+        #marker_html: render_to_string(partial: "marker")
+      }
+    end
   end
 
   def show
     @toilet = Toilet.find(params[:id])
+    @markers = [{
+      lat: @toilet.latitude,
+      lng: @toilet.longitude
+    }]
   end
 
 
+  def show
+    @toilet = Toilet.find(params[:id])
+  end
+  
   private
 
   def toilet_params

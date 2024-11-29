@@ -3,4 +3,8 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def dashboard
+    @reviewed_toilets = Toilet.joins(:reviews).where(user: current_user)
+  end
 end
