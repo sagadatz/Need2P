@@ -10,4 +10,6 @@ class User < ApplicationRecord
     conditions[:username] = conditions.delete(:email)  # Change :email to :username
     super(conditions)
   end
+
+  validates :name, presence: true
 end
