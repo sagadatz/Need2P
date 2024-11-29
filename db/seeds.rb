@@ -57,12 +57,6 @@ spooky_toilets = [
   "The Forbidden Flush"
 ]
 
-class AddCleanToReviews < ActiveRecord::Migration[7.0]
-  def change
-    add_column :reviews, :clean, :integer
-  end
-end
-
 # Create toilets with associations
 spooky_toilets.each_with_index do |toilet_name, i|
   new_toilet = Toilet.create!(
