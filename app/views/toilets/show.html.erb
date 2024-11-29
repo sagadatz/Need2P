@@ -45,9 +45,23 @@
         </div>
     </div>
 
+        <button
+          class="btn btn-primary w-100 mb-4"
+          onclick="navigateToToilet(<%= @toilet.latitude %>, <%= @toilet.longitude %>)">
+          Navigate to this toilet
+
         <button class="btn btn-primary w-100 mb-4 navigate-button">
             Navigate to this toilet
+
         </button>
+
+
+        <script>
+          function navigateToToilet(lat, long) {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${long}`;
+            window.open(url, '_blank');
+          }
+        </script>
 
         <section class="mb-4">
             <h2 class="h4 mb-3">User Reviews</h2>
