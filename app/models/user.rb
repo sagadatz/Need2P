@@ -6,10 +6,10 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
 
   # Override Devise's find_for_database_authentication to search by username
-  def self.find_for_database_authentication(conditions)
-    conditions[:username] = conditions.delete(:email)  # Change :email to :username
-    super(conditions)
-  end
+  # def self.find_for_database_authentication(conditions)
+  #   conditions[:username] = conditions.delete(:email)  # Change :email to :username
+  #   super(conditions)
+  # end
 
   validates :name, presence: true
 end
