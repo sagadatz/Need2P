@@ -32,6 +32,10 @@ class ToiletsController < ApplicationController
   def show
   end
 
+  def show
+    @toilet = Toilet.find(params[:id])
+  end
+
 
   private
 
