@@ -13,7 +13,11 @@ class ToiletsController < ApplicationController
   end
 
   def index
-    @toilets = Toilet.all
+    if params[:query].present?
+      @toilets = Toilet.where("name ILIKE ? OR location ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+    else
+      @toilets = Toilet.all
+    end
     @markers = @toilets.geocoded.map do |toilet|
       {
         lat: toilet.latitude,
@@ -34,6 +38,12 @@ class ToiletsController < ApplicationController
       lat: @toilet.latitude,
       lng: @toilet.longitude
     }]
+  end
+
+  def autocomplete
+    query = params[:query]
+    toilets = Toilet.where("name ILIKE ? OR location ILIKE ?", "%#{query}%", "%#{query}%").limit(5)
+    render json: toilets.pluck(:name, :location).flatten.uniq
   end
 
   private

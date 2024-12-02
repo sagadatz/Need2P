@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :toilets, only: [:index, :show, :new, :create] do
+    resources :reviews, only: [:new, :create, :show]
+    collection do
+      get :autocomplete
+    end
     resources :reviews, only: [:new, :create, :show, :destroy]
   end
   get "dashboard", to: "pages#dashboard", as: :dashboard
-
 end
