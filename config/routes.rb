@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     collection do
       get :autocomplete
     end
+    resources :reviews, only: [:new, :create, :show, :destroy]
   end
   get "dashboard", to: "pages#dashboard", as: :dashboard
-
 end

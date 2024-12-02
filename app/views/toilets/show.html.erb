@@ -98,12 +98,23 @@
             <div class="reviews-container">
               <% @toilet.reviews.each do |review| %>
                 <div class="review">
-                  <div class="rating">
-                    <% if review.rating %>
-                      <%= "★" * review.rating %>
-                      <%= "☆" * (5 - review.rating) %>
-                    <% else %>
-                      <%= "☆" * 5 %>
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="rating">
+                      <% if review.rating %>
+                        <%= "★" * review.rating %>
+                        <%= "☆" * (5 - review.rating) %>
+                      <% else %>
+                        <%= "☆" * 5 %>
+                      <% end %>
+                    </div>
+
+                    <% if review.user == current_user %>
+                      <%= button_to toilet_review_path(@toilet, review),
+                          method: :delete,
+                          form: { data: { turbo_confirm: 'Are you sure you want to delete this review?' } },
+                          class: "btn btn-link text-danger p-0 bg-white border-0" do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %>
                     <% end %>
                   </div>
 
@@ -235,6 +246,14 @@
 
   .category i {
     color: #666;
+  }
+
+  .btn-link.bg-white:hover {
+    background-color: #fff !important;
+  }
+
+  .btn-link.bg-white:focus {
+    box-shadow: none;
   }
 </style>
 
