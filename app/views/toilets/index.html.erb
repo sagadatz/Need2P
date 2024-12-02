@@ -20,7 +20,72 @@
                 <% end %>
             </div>
             <div class="col-auto">
-                <button class="btn btn-outline-primary"><i class="fas fa-filter"></i></button>
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    <div class="dropdown-menu p-3" style="width: 300px;">
+                        <form action="<%= toilets_path %>" method="get">
+                            <h6 class="mb-2">Rating</h6>
+                            <div class="mb-3">
+                                <div class="star-rating" data-filter-target="stars">
+                                    <i class="far fa-star" data-value="1"></i>
+                                    <i class="far fa-star" data-value="2"></i>
+                                    <i class="far fa-star" data-value="3"></i>
+                                    <i class="far fa-star" data-value="4"></i>
+                                    <i class="far fa-star" data-value="5"></i>
+                                </div>
+                                <input type="hidden" name="filters[stars]" data-filter-target="starsInput">
+                            </div>
+                            <h6 class="mb-3">Categories</h6>
+                            <div class="mb-2">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="female-friendly" name="filters[female_friendly]">
+                                    <label class="form-check-label" for="female-friendly">Female-Friendly</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="handicap-friendly" name="filters[handicap_friendly]">
+                                    <label class="form-check-label" for="handicap-friendly">Handicap-Friendly</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="family-friendly" name="filters[family_friendly]">
+                                    <label class="form-check-label" for="family-friendly">Family-Friendly</label>
+                                </div>
+                            </div>
+
+
+                            <h6 class="mb-2">Entry:</h6>
+                            <div class="mb-2 d-flex">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="paid" name="filters[paid]">
+                                    <label class="form-check-label" for="paid">Paid</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="free" name="filters[free]">
+                                    <label class="form-check-label" for="free">Free</label>
+                                </div>
+                            </div>
+
+                            <h6 class="mb-2">Status:</h6>
+                            <div class="mb-3 d-flex">
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="clean" name="filters[clean]">
+                                    <label class="form-check-label" for="clean">Clean</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="dirty" name="filters[dirty]">
+                                    <label class="form-check-label" for="dirty">Dirty</label>
+                                </div>
+                                <div class="form-check me-3">
+                                    <input type="checkbox" class="form-check-input" id="accessible" name="filters[accessible]">
+                                    <label class="form-check-label" for="accessible">Accessible</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Apply</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-auto">
                 <button class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
