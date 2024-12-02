@@ -11,6 +11,22 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @toilet = Toilet.find(params[:toilet_id])
+    @review = Review.find(params[:id])
+
+    if @review.user == current_user
+      if @review.destroy
+        flash[:notice] = 'Review was successfully deleted.'
+      else
+        flash[:alert] = 'Error deleting review.'
+      end
+    else
+      flash[:alert] = 'You can only delete your own reviews.'
+    end
+
+    redirect_to toilet_path(@toilet), status: :see_other
+  end
 
   private
 
