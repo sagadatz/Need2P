@@ -166,7 +166,7 @@
             <h2 class="h4 mb-3">Leave a Review</h2>
 
             <%= form_with(model: [@toilet, @review], local: true) do |f| %>
-                <div class="rating-container">
+                <div class="rating-container mb-3">
                     <div class="stars">
                         <% 5.times do |i| %>
                             <span class="star" data-rating="<%= i + 1 %>">☆</span>
@@ -218,10 +218,13 @@
   .stars {
     font-size: 24px;
     cursor: pointer;
+    display: inline-block;
   }
   .star {
     color: #ddd;
     transition: color 0.2s;
+    cursor: pointer;
+    user-select: none;
   }
   .star.active {
     color: #ffd700;
@@ -258,37 +261,42 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const stars = document.querySelectorAll('.star');
-  const ratingInput = document.getElementById('rating-input');
+  document.addEventListener('turbo:load', function() {
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating-input');
 
-  function setRating(rating) {
-    stars.forEach((star, index) => {
-      star.textContent = index < rating ? '★' : '☆';
-      star.classList.toggle('active', index < rating);
-    });
-    ratingInput.value = rating;
-  }
-
-  stars.forEach(star => {
-    star.addEventListener('mouseover', function() {
-      const rating = this.dataset.rating;
-      stars.forEach((s, index) => {
-        s.textContent = index < rating ? '★' : '☆';
+    function setRating(rating) {
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.textContent = '★';
+          star.classList.add('active');
+        } else {
+          star.textContent = '☆';
+          star.classList.remove('active');
+        }
       });
-    });
+      ratingInput.value = rating;
+    }
 
-    star.addEventListener('mouseout', function() {
-      const currentRating = ratingInput.value || 0;
-      stars.forEach((s, index) => {
-        s.textContent = index < currentRating ? '★' : '☆';
+    stars.forEach(star => {
+      star.addEventListener('mouseover', function() {
+        const rating = parseInt(this.dataset.rating);
+        stars.forEach((s, index) => {
+          s.textContent = index < rating ? '★' : '☆';
+        });
       });
-    });
 
-    star.addEventListener('click', function() {
-      const rating = this.dataset.rating;
-      setRating(rating);
+      star.addEventListener('mouseout', function() {
+        const currentRating = parseInt(ratingInput.value) || 0;
+        stars.forEach((s, index) => {
+          s.textContent = index < currentRating ? '★' : '☆';
+        });
+      });
+
+      star.addEventListener('click', function() {
+        const rating = parseInt(this.dataset.rating);
+        setRating(rating);
+      });
     });
   });
-});
 </script>
