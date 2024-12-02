@@ -14,7 +14,10 @@
     <div class="container mt-3">
         <div class="row g-2">
             <div class="col">
-                <input type="search" class="form-control" placeholder="Search">
+                <%= form_with url: toilets_path, method: :get, local: true do %>
+                    <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search by name or location" %>
+                    <div id="suggestions" class="suggestions-list"></div>
+                <% end %>
             </div>
             <div class="col-auto">
                 <button class="btn btn-outline-primary"><i class="fas fa-filter"></i></button>
