@@ -108,26 +108,40 @@
                   </div>
 
                   <div class="categories-grid">
-                    <div class="category">
-                      <i class="fas fa-broom"></i>
-                      <span>Cleanliness: <%= "★" * review.dirty %><%= "☆" * (5 - review.dirty) %></span>
-                    </div>
-                    <div class="category">
-                      <i class="fas fa-wheelchair"></i>
-                      <span>Accessibility: <%= "★" * review.accessible %><%= "☆" * (5 - review.accessible) %></span>
-                    </div>
-                    <div class="category">
-                      <i class="fas fa-euro-sign"></i>
-                      <span>Paid Entry: <%= "★" * review.paid_entry %><%= "☆" * (5 - review.paid_entry) %></span>
-                    </div>
-                    <div class="category">
-                      <i class="fas fa-female"></i>
-                      <span>Female Friendly: <%= "★" * review.female_friendly %><%= "☆" * (5 - review.female_friendly) %></span>
-                    </div>
-                    <div class="category">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <span>Location: <%= "★" * review.well_located %><%= "☆" * (5 - review.well_located) %></span>
-                    </div>
+                    <% if review.dirty.present? && review.dirty > 0 %>
+                      <div class="category">
+                        <i class="fas fa-broom"></i>
+                        <span>Clean</span>
+                      </div>
+                    <% end %>
+
+                    <% if review.accessible.present? && review.accessible > 0 %>
+                      <div class="category">
+                        <i class="fas fa-wheelchair"></i>
+                        <span>Accessible</span>
+                      </div>
+                    <% end %>
+
+                    <% if review.paid_entry.present? && review.paid_entry > 0 %>
+                      <div class="category">
+                        <i class="fas fa-euro-sign"></i>
+                        <span>Paid Entry</span>
+                      </div>
+                    <% end %>
+
+                    <% if review.female_friendly.present? && review.female_friendly > 0 %>
+                      <div class="category">
+                        <i class="fas fa-female"></i>
+                        <span>Female Friendly</span>
+                      </div>
+                    <% end %>
+
+                    <% if review.well_located.present? && review.well_located > 0 %>
+                      <div class="category">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Well Located</span>
+                      </div>
+                    <% end %>
                   </div>
 
                   <p><%= review.content %></p>
@@ -203,9 +217,9 @@
   }
 
   .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin: 15px 0;
   }
 
@@ -213,18 +227,14 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px;
-    border-radius: 4px;
-    background-color: #f8f9fa;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    font-size: 0.9em;
   }
 
   .category i {
-    width: 20px;
     color: #666;
-  }
-
-  .category span {
-    font-size: 0.9em;
   }
 </style>
 
