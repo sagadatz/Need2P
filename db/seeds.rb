@@ -136,4 +136,62 @@ Review.create!(title: "Review for #{toilet19.name}", content: "This is a review 
 toilet20 = Toilet.create!(name: spooky_toilets[19], location: "Spooky Address 20, Berlin", latitude: 52.5 + rand(-0.05..0.05), longitude: 13.4 + rand(-0.05..0.05), user: user4)
 Review.create!(title: "Review for #{toilet20.name}", content: "This is a review for the spooky toilet #{toilet20.name}. It's eerie but functional!", rating: rand(1..5), user: user4, toilet: toilet20)
 
+# Zusätzliche gruselige Reviews mit spezifischen Attributen
+additional_review_contents = [
+  # 5 female-friendly Reviews (davon 3 mit paid_entry)
+  ["Sehr sicherer und sauberer Ort. Perfekt beleuchtet!", true, false, false, true, true, true],
+  ["Extra Haken für Taschen und gute Beleuchtung.", true, false, false, true, true, false],
+  ["Separate Bereiche für Damen, sehr gepflegt.", true, false, false, true, true, true],
+  ["Gut gesichert und hell. Perfekt für späte Stunden.", true, false, false, false, true, false],
+  ["Moderne Ausstattung und sehr sicher.", true, false, false, true, true, false],
+
+  # 2 dirty Reviews
+  ["Etwas ungepflegt, aber funktional.", false, true, false, false, false, true],
+  ["Könnte eine Reinigung vertragen...", false, true, false, false, false, false],
+
+  # 3 clean Reviews
+  ["Blitzsauber und gut gewartet!", false, false, true, false, false, true],
+  ["Hygienisch einwandfrei!", false, false, true, false, false, true],
+  ["Makellos sauber, wie im Hotel.", false, false, true, false, false, false],
+
+  # 5 accessible Reviews
+  ["Perfekt für Rollstuhlfahrer geeignet.", false, false, false, false, false, true],
+  ["Breite Türen und gute Ausstattung für alle.", false, false, false, false, false, true],
+  ["Barrierefrei und gut durchdacht.", false, false, false, false, false, true],
+  ["Behindertengerecht mit allen Extras.", false, false, false, false, false, true],
+  ["Vorbildliche barrierefreie Einrichtung.", false, false, false, false, false, true],
+
+  # Restliche Reviews ohne spezielle Attribute
+  ["Mysteriöse Geräusche, aber funktional.", false, false, false, false, false, false],
+  ["Spooky, aber sauber!", false, false, false, false, false, false],
+  ["Perfekt für Grusel-Fans.", false, false, false, false, false, false],
+  ["Unheimlich gut!", false, false, false, false, false, false],
+  ["Gespenstisch schön!", false, false, false, false, false, false]
+]
+
+# Zusätzliche Reviews erstellen
+toilets = Toilet.all.to_a
+users = User.all.to_a
+
+additional_review_contents.each_with_index do |review_data, index|
+  content, female_friendly, dirty, clean, paid_entry, accessible, well_located = review_data
+
+  Review.create!(
+    title: "Spuk-Review ##{index + 1}",
+    content: content,
+    rating: rand(3..5),
+    user: users.sample,
+    toilet: toilets.sample,
+    created_at: rand(2.months.ago..Time.now),
+    female_friendly: female_friendly ? 1 : 0,
+    dirty: dirty ? 1 : 0,
+    clean: clean ? 1 : 0,
+    paid_entry: paid_entry ? 1 : 0,
+    accessible: accessible ? 1 : 0,
+    well_located: well_located ? 1 : 0
+  )
+end
+
+puts "#{additional_review_contents.length} zusätzliche gruselige Reviews wurden erstellt!"
+
 puts "Seeded #{User.count} users, #{Toilet.count} toilets, and #{Review.count} reviews."
