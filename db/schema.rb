@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_03_094851) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_03_112122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,6 +91,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_03_094851) do
     t.boolean "accessible"
     t.boolean "baby_friendly"
     t.boolean "female_friendly"
+    t.string "image_url"
+    t.boolean "handicap_friendly"
+    t.boolean "family_friendly", default: false
     t.index ["user_id"], name: "index_toilets_on_user_id"
   end
 
