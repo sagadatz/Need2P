@@ -12,7 +12,7 @@ export default class extends Controller {
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
-
+    console.log("hello")
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
@@ -21,7 +21,8 @@ export default class extends Controller {
     if (this.sourceValue === "index") {
     this.map.addControl(new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl
+      mapboxgl: mapboxgl,
+      placeholder: 'Search street'
     }))}
     this.#addMarkersToMap()
     this.#fitMapToMarkers()

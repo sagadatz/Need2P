@@ -74,7 +74,7 @@ puts "Seeded #{User.count} users, #{Toilet.count} spooky toilet."
 
 # Create toilets and reviews for user1
 toilet1 = Toilet.create!(name: spooky_toilets[0], location: "Spooky Address 1, Berlin", latitude: 52.5 + rand(-0.05..0.05), longitude: 13.4 + rand(-0.05..0.05), user: user1)
-Review.create!(title: "Review for #{toilet1.name}", content: "This is a review for the spooky toilet #{toilet1.name}. It's eerie but functional!", rating: rand(1..5), user: user1, toilet: toilet1)
+Review.create!(title: "Review for #{toilet1.name}", content: "This is a review for the spooky toilet #{toilet1.name}. It's eerie but functional!", rating: 4, user: user1, toilet: toilet1)
 
 toilet2 = Toilet.create!(name: spooky_toilets[1], location: "Spooky Address 2, Berlin", latitude: 52.5 + rand(-0.05..0.05), longitude: 13.4 + rand(-0.05..0.05), user: user1)
 Review.create!(title: "Review for #{toilet2.name}", content: "This is a review for the spooky toilet #{toilet2.name}. It's eerie but functional!", rating: rand(1..5), user: user1, toilet: toilet2)
@@ -144,7 +144,6 @@ additional_review_contents = [
   ["Separate Bereiche für Damen, sehr gepflegt.", true, false, false, true, true, true],
   ["Gut gesichert und hell. Perfekt für späte Stunden.", true, false, false, false, true, false],
   ["Moderne Ausstattung und sehr sicher.", true, false, false, true, true, false],
-
   # 2 dirty Reviews
   ["Etwas ungepflegt, aber funktional.", false, true, false, false, false, true],
   ["Könnte eine Reinigung vertragen...", false, true, false, false, false, false],
@@ -193,5 +192,19 @@ additional_review_contents.each_with_index do |review_data, index|
 end
 
 puts "#{additional_review_contents.length} zusätzliche gruselige Reviews wurden erstellt!"
+
+# Markiere 5 Toiletten als handicap-friendly
+toilets = Toilet.all.to_a
+toilets.sample(5).each do |toilet|
+  toilet.update!(handicap_friendly: true)
+end
+
+# Markiere 5 andere Toiletten als family-friendly
+remaining_toilets = toilets.reject(&:handicap_friendly)
+remaining_toilets.sample(5).each do |toilet|
+  toilet.update!(family_friendly: true)
+end
+
+puts "5 Toiletten wurden als handicap-friendly und 5 als family-friendly markiert!"
 
 puts "Seeded #{User.count} users, #{Toilet.count} toilets, and #{Review.count} reviews."
