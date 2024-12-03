@@ -119,35 +119,35 @@
                   </div>
 
                   <div class="categories-grid">
-                    <% if review.dirty.present? && review.dirty > 0 %>
+                    <% if review.dirty.present? && review.dirty == true %>
                       <div class="category">
                         <i class="fas fa-broom"></i>
                         <span>Clean</span>
                       </div>
                     <% end %>
 
-                    <% if review.accessible.present? && review.accessible > 0 %>
+                    <% if review.accessible.present? && review.accessible == true %>
                       <div class="category">
                         <i class="fas fa-wheelchair"></i>
                         <span>Accessible</span>
                       </div>
                     <% end %>
 
-                    <% if review.paid_entry.present? && review.paid_entry > 0 %>
+                    <% if review.paid_entry.present? && review.paid_entry == true %>
                       <div class="category">
                         <i class="fas fa-euro-sign"></i>
                         <span>Paid Entry</span>
                       </div>
                     <% end %>
 
-                    <% if review.female_friendly.present? && review.female_friendly > 0 %>
+                    <% if review.female_friendly.present? && review.female_friendly == true %>
                       <div class="category">
                         <i class="fas fa-female"></i>
                         <span>Female Friendly</span>
                       </div>
                     <% end %>
 
-                    <% if review.well_located.present? && review.well_located > 0 %>
+                    <% if review.well_located.present? && review.well_located == true %>
                       <div class="category">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Well Located</span>
