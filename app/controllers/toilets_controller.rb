@@ -49,15 +49,12 @@ class ToiletsController < ApplicationController
     #   @toilets = @toilets.accessible if params[:filters][:accessible]
     end
 
-    @markers = @toilets.geocoded.map do |toilet|
+    @markers = @toilets.map do |toilet|
       {
         lat: toilet.latitude,
         lng: toilet.longitude,
-        #info_window_html: render_to_string(
-          #partial: "info_window",
-          #locals: { toilet: toilet }
-        #),
-        #marker_html: render_to_string(partial: "marker")
+        info_window_html: render_to_string(partial: "popup", locals: { toilet: toilet }),
+        marker_html: render_to_string(partial: "marker")
       }
     end
   end
