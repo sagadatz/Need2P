@@ -1,0 +1,12 @@
+<div class="map-popup">
+  <h6><%= link_to toilet.name, toilet_path(toilet) %></h6>
+  <div class="text-warning">
+    <% toilet.average_rating.to_i.times do %>
+      <i class="fas fa-star"></i>
+    <% end %>
+    <% (5 - toilet.average_rating.to_i).times do %>
+      <i class="far fa-star"></i>
+    <% end %>
+    <span><%= toilet.average_rating %></span>
+  </div>
+</div> 

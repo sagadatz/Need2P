@@ -24,14 +24,12 @@ export default class extends Controller {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
 
-      // Create a DOM element for the marker
-      const customMarker = document.createElement('div')
-      customMarker.className = 'marker'
-      customMarker.style.fontSize = '32px' // Make emoji bigger
-      customMarker.innerHTML = '💩'        // Toilet emoji
+      // Create a custom marker element
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
 
-      new mapboxgl.Marker({ element: customMarker })
-        .setLngLat([marker.lng, marker.lat])
+      new mapboxgl.Marker(customMarker)  // Pass the custom marker element here
+        .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
         .addTo(this.map)
     })
