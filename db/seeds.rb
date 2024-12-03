@@ -74,6 +74,7 @@ puts "Seeded #{User.count} users, #{Toilet.count} spooky toilet."
 
 # Create toilets and reviews for user1
 toilet1 = Toilet.create!(name: spooky_toilets[0], location: "Spooky Address 1, Berlin", latitude: 52.5 + rand(-0.05..0.05), longitude: 13.4 + rand(-0.05..0.05), user: user1)
+toilet1.update!(image_url: "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/tumblr_inline_nv2w5ozl4L1ty84t8_1280_1_zwyxqf.webp")
 Review.create!(title: "Review for #{toilet1.name}", content: "This is a review for the spooky toilet #{toilet1.name}. It's eerie but functional!", rating: 4, user: user1, toilet: toilet1)
 
 toilet2 = Toilet.create!(name: spooky_toilets[1], location: "Spooky Address 2, Berlin", latitude: 52.5 + rand(-0.05..0.05), longitude: 13.4 + rand(-0.05..0.05), user: user1)
@@ -205,6 +206,22 @@ remaining_toilets.sample(5).each do |toilet|
   toilet.update!(family_friendly: true)
 end
 
-puts "5 Toiletten wurden als handicap-friendly und 5 als family-friendly markiert!"
+# Beispiel für das Hinzufügen von Bildern zu Toiletten
+image_urls = [
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/tumblr_inline_nv2w5ozl4L1ty84t8_1280_1_zwyxqf.webp",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/what-a-cool-way-to-make-new-friends-above-a-photo-of-two-toilets-facing-each-other-in-a-bathroom_aawlfu.jpg",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/l214t9f0piq51_gs54an.jpg",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/funny-urinal-toilets-v0-wo3gkyc0wtpb1_jppztz.webp",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/Crazy-Toilet-14_tkwafg.jpg",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/images_syknfg.jpg",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223103/funny-urinal-toilets-v0-kd4brxc0wtpb1_cfgclm.webp",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223102/funny-urinal-toilets-v0-5wpgmxc0wtpb1_bupc7p.webp",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223102/funny-bathroom-design-fails-174-5c94fb76745e4__700_fjmhvf.jpg",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223102/Crazy-Toilet-25_jiphuj.jpg",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223102/2056_syjssi.webp",
+  "https://res.cloudinary.com/dq57wkefg/image/upload/v1733223101/bb5f41685ab321a47745a62e2aba68ac_irb4sd.jpg"
+]
 
-puts "Seeded #{User.count} users, #{Toilet.count} toilets, and #{Review.count} reviews."
+Toilet.all.each_with_index do |toilet, index|
+  toilet.update!(image_url: image_urls[index % image_urls.length])
+end
