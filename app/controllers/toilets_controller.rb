@@ -14,6 +14,10 @@ class ToiletsController < ApplicationController
 
   def index
     @toilets = Toilet.all
+    if params.dig(:filters, :stars).present?
+      min_rating = params[:filters][:stars].to_i
+      @toilets = @toilets.where('average_rating >= ?', min_rating)
+    end
 
     if params[:query].present?
       @toilets = Toilet.where("name ILIKE ? OR location ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
@@ -23,10 +27,18 @@ class ToiletsController < ApplicationController
 
     if params[:filters].present?
       @toilets = @toilets.joins(:reviews)
-      @toilets = @toilets.where(reviews: { female_friendly: params[:filters][:female_friendly] == "on" })
-      @toilets = @toilets.where(reviews: { handicap_friendly: params[:filters][:handicap_friendly] == "on" })
-      @toilets = @toilets.where(paid: true) if params[:filters][:paid]
-
+      if params[:filters][:female_friendly]
+        @toilets = @toilets.where(reviews: { female_friendly: params[:filters][:female_friendly] == "on" })
+      end
+      if params[:filters][:handicap_friendly]
+        @toilets = @toilets.where(reviews: { handicap_friendly: params[:filters][:handicap_friendly] == "on" })
+      end
+      if params[:filters][:family_friendly]
+        @toilets = @toilets.where(reviews: { family_friendly: params[:filters][:family_friendly] == "on" })
+      end
+      # if params[:filters][:paid]
+      #   @toilets = @toilets.where(paid: true)
+      # end
     #   @toilets = @toilets.handicap_friendly if params[:filters][:handicap_friendly]
     #   @toilets = @toilets.family_friendly if params[:filters][:family_friendly]
     #   @toilets = @toilets.where("rating >= ?", params[:filters][:stars]) if params[:filters][:stars]

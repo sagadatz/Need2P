@@ -45,3 +45,16 @@ background-color: #1e3a8a;
 .card-frame {
   text-decoration: none;
 }
+.status-legend {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+  background: white;
+  padding: 5px;    /* von 10px auf 5px reduziert */
+  border-radius: 2px; /* von 4px auf 2px reduziert */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: scale(0.5); /* reduziert die Gesamtgröße auf 50% */
+  transform-origin: bottom right; /* legt den Ausgangspunkt der Skalierung fest */
+  width: 100px;  /* Ursprüngliche Größe vor Skalierung */
+  height: 150px; /* Ursprüngliche Größe vor Skalierung */
+}
