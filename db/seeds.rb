@@ -183,12 +183,14 @@ additional_review_contents.each_with_index do |review_data, index|
     user: users.sample,
     toilet: toilets.sample,
     created_at: rand(2.months.ago..Time.now),
-    female_friendly: female_friendly ? 1 : 0,
-    dirty: dirty ? 1 : 0,
-    clean: clean ? 1 : 0,
-    paid_entry: paid_entry ? 1 : 0,
-    accessible: accessible ? 1 : 0,
-    well_located: well_located ? 1 : 0
+    female_friendly: female_friendly,
+    dirty: dirty,
+    clean: clean,
+    paid_entry: paid_entry,
+    accessible: accessible,
+    well_located: well_located,
+    handicap_friendly: [true, false].sample,
+    family_friendly: [true, false].sample
   )
 end
 

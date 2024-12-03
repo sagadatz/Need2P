@@ -15,7 +15,7 @@
             </div>
             <div class="col-auto">
                 <div class="dropdown">
-                    <button class="btn btn-outline-primary" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-outline-primary" type="button" id="filterDropdown" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                         <i class="fas fa-filter"></i>
                     </button>
                     <div class="dropdown-menu p-3" style="width: 300px;">
@@ -23,26 +23,26 @@
                             <h6 class="mb-2">Rating</h6>
                             <div class="mb-3">
                                 <div class="star-rating" data-filter-target="stars" data-action="click->filter#setRating">
-                                    <i class="far fa-star" data-value="1" role="button"></i>
-                                    <i class="far fa-star" data-value="2" role="button"></i>
-                                    <i class="far fa-star" data-value="3" role="button"></i>
-                                    <i class="far fa-star" data-value="4" role="button"></i>
-                                    <i class="far fa-star" data-value="5" role="button"></i>
+                                    <i class="<%= params.dig(:filters, :stars).to_i >= 1 ? 'fas' : 'far' %> fa-star" data-value="1" role="button"></i>
+                                    <i class="<%= params.dig(:filters, :stars).to_i >= 2 ? 'fas' : 'far' %> fa-star" data-value="2" role="button"></i>
+                                    <i class="<%= params.dig(:filters, :stars).to_i >= 3 ? 'fas' : 'far' %> fa-star" data-value="3" role="button"></i>
+                                    <i class="<%= params.dig(:filters, :stars).to_i >= 4 ? 'fas' : 'far' %> fa-star" data-value="4" role="button"></i>
+                                    <i class="<%= params.dig(:filters, :stars).to_i >= 5 ? 'fas' : 'far' %> fa-star" data-value="5" role="button"></i>
                                 </div>
                                 <input type="hidden" name="filters[stars]" data-filter-target="starsInput">
                             </div>
                             <h6 class="mb-3">Categories</h6>
                             <div class="mb-2">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="female-friendly" name="filters[female_friendly]">
+                                    <input type="checkbox" class="form-check-input" id="female-friendly" name="filters[female_friendly]" <%= 'checked' if params.dig(:filters, :female_friendly) %>>
                                     <label class="form-check-label" for="female-friendly">Female-Friendly</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="handicap-friendly" name="filters[handicap_friendly]">
+                                    <input type="checkbox" class="form-check-input" id="handicap-friendly" name="filters[handicap_friendly]" <%= 'checked' if params.dig(:filters, :handicap_friendly) %>>
                                     <label class="form-check-label" for="handicap-friendly">Handicap-Friendly</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="family-friendly" name="filters[family_friendly]">
+                                    <input type="checkbox" class="form-check-input" id="family-friendly" name="filters[family_friendly]" <%= 'checked' if params.dig(:filters, :family_friendly) %>>
                                     <label class="form-check-label" for="family-friendly">Family-Friendly</label>
                                 </div>
                             </div>
@@ -51,11 +51,11 @@
                             <h6 class="mb-2">Entry:</h6>
                             <div class="mb-2 d-flex">
                                 <div class="form-check me-3">
-                                    <input type="checkbox" class="form-check-input" id="paid" name="filters[paid]">
+                                    <input type="checkbox" class="form-check-input" id="paid" name="filters[paid]" <%= 'checked' if params.dig(:filters, :paid) %>>
                                     <label class="form-check-label" for="paid">Paid</label>
                                 </div>
                                 <div class="form-check me-3">
-                                    <input type="checkbox" class="form-check-input" id="free" name="filters[free]">
+                                    <input type="checkbox" class="form-check-input" id="free" name="filters[free]" <%= 'checked' if params.dig(:filters, :free) %>>
                                     <label class="form-check-label" for="free">Free</label>
                                 </div>
                             </div>
@@ -63,15 +63,15 @@
                             <h6 class="mb-2">Status:</h6>
                             <div class="mb-3 d-flex">
                                 <div class="form-check me-3">
-                                    <input type="checkbox" class="form-check-input" id="clean" name="filters[clean]">
+                                    <input type="checkbox" class="form-check-input" id="clean" name="filters[clean]" <%= 'checked' if params.dig(:filters, :clean) %>>
                                     <label class="form-check-label" for="clean">Clean</label>
                                 </div>
                                 <div class="form-check me-3">
-                                    <input type="checkbox" class="form-check-input" id="dirty" name="filters[dirty]">
+                                    <input type="checkbox" class="form-check-input" id="dirty" name="filters[dirty]" <%= 'checked' if params.dig(:filters, :dirty) %>>
                                     <label class="form-check-label" for="dirty">Dirty</label>
                                 </div>
                                 <div class="form-check me-3">
-                                    <input type="checkbox" class="form-check-input" id="accessible" name="filters[accessible]">
+                                    <input type="checkbox" class="form-check-input" id="accessible" name="filters[accessible]" <%= 'checked' if params.dig(:filters, :accessible) %>>
                                     <label class="form-check-label" for="accessible">Accessible</label>
                                 </div>
                             </div>
@@ -106,8 +106,27 @@
                           <div>
                               <h5 class="card-title"><%=toilet.name%></h5>
                               <p class="card-text text-muted">0.2 km</p>
-                              <span class="badge badge-female-friendly text-white">Female-Friendly</span>
-                              <span class="badge badge-clean text-white">Clean</span>
+                              <% if toilet.female_friendly? %>
+                                <span class="badge badge-female-friendly text-white">Female-Friendly</span>
+                              <% end %>
+                              <% if toilet.clean? %>
+                                <span class="badge badge-clean text-white">Clean</span>
+                              <% end %>
+                              <% if toilet.accessible? %>
+                                <span class="badge badge-accessible text-white">Accessible</span>
+                              <% end %>
+                              <% if toilet.paid_entry? %>
+                                <span class="badge badge-paid text-white">Paid</span>
+                              <% end %>
+                              <% if toilet.well_located? %>
+                                <span class="badge badge-well-located text-white">Well-Located</span>
+                              <% end %>
+                              <% if toilet.handicap_friendly? %>
+                                <span class="badge badge-handicap-friendly text-white">Handicap-Friendly</span>
+                              <% end %>
+                              <% if toilet.family_friendly? %>
+                                <span class="badge badge-family-friendly text-white">Family-Friendly</span>
+                              <% end %>
                           </div>
                           <div class="text-warning">
                               <i class="fas fa-star"></i>

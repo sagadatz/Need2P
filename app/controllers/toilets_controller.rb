@@ -14,15 +14,11 @@ class ToiletsController < ApplicationController
 
   def index
     @toilets = Toilet.all
-    if params.dig(:filters, :stars).present?
-      min_rating = params[:filters][:stars].to_i
-      @toilets = @toilets.where('average_rating >= ?', min_rating)
-    end
 
     if params[:query].present?
-      @toilets = Toilet.where("name ILIKE ? OR location ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+      @toilets = @toilets.where("name ILIKE ? OR location ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
     else
-      @toilets = Toilet.all
+      @toilets = @toilets
     end
 
     if params[:filters].present?
@@ -39,14 +35,21 @@ class ToiletsController < ApplicationController
       # if params[:filters][:paid]
       #   @toilets = @toilets.where(paid: true)
       # end
-    #   @toilets = @toilets.handicap_friendly if params[:filters][:handicap_friendly]
-    #   @toilets = @toilets.family_friendly if params[:filters][:family_friendly]
-    #   @toilets = @toilets.where("rating >= ?", params[:filters][:stars]) if params[:filters][:stars]
-    #   @toilets = @toilets.where(paid: true) if params[:filters][:paid]
-    #   @toilets = @toilets.where(paid: false) if params[:filters][:free]
-    #   @toilets = @toilets.clean if params[:filters][:clean]
-    #   @toilets = @toilets.dirty if params[:filters][:dirty]
-    #   @toilets = @toilets.accessible if params[:filters][:accessible]
+      #   @toilets = @toilets.handicap_friendly if params[:filters][:handicap_friendly]
+      #   @toilets = @toilets.family_friendly if params[:filters][:family_friendly]
+      #   @toilets = @toilets.where("rating >= ?", params[:filters][:stars]) if params[:filters][:stars]
+      #   @toilets = @toilets.where(paid: true) if params[:filters][:paid]
+      #   @toilets = @toilets.where(paid: false) if params[:filters][:free]
+      #   @toilets = @toilets.clean if params[:filters][:clean]
+      #   @toilets = @toilets.dirty if params[:filters][:dirty]
+      #   @toilets = @toilets.accessible if params[:filters][:accessible]
+
+    end
+
+    if params.dig(:filters, :stars).present?
+      min_rating = params[:filters][:stars].to_i
+      @toilets = @toilets.select { |toilet| toilet.average_rating >= min_rating }
+      # @toilets = @toilets.joins(:reviews).where('reviews.rating >= ?', min_rating)
     end
 
     @markers = @toilets.map do |toilet|
