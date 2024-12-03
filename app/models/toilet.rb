@@ -21,6 +21,35 @@ class Toilet < ApplicationRecord
     reviews.average(:rating).to_f.round(1)
   end
 
-  # Add any validations or default values if needed
-  # validates :accessible, inclusion: { in: [true, false] }
+  def dirty?
+    reviews.any? { |review| review.dirty }
+  end
+
+  def clean?
+    reviews.any? { |review| review.clean }
+  end
+
+  def accessible?
+    reviews.any? { |review| review.accessible }
+  end
+
+  def paid_entry?
+    reviews.any? { |review| review.paid_entry }
+  end
+
+  def female_friendly?
+    reviews.any? { |review| review.female_friendly }
+  end
+
+  def well_located?
+    reviews.any? { |review| review.well_located }
+  end
+
+  def handicap_friendly?
+    reviews.any? { |review| review.handicap_friendly }
+  end
+
+  def family_friendly?
+    reviews.any? { |review| review.family_friendly }
+  end
 end

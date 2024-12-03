@@ -75,3 +75,5 @@ group :test do
 end
 
 gem "geocoder", "~> 1.8"
+
+gem 'ostruct'

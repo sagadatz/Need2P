@@ -23,7 +23,9 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             <% @last_visited_toilets.each do |toilet| %>
               <div class="col">
-                <%= render 'toilets/toilet_card', toilet: toilet %>
+                <div class="toilet-card">
+                  <%= render 'toilets/toilet_card', toilet: toilet %>
+                </div>
               </div>
             <% end %>
         </div>
@@ -35,10 +37,26 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
             <% current_user.toilets.each do |toilet| %>
               <div class="col">
-                <%= render 'toilets/toilet_card', toilet: toilet %>
+                <div class="toilet-card">
+                  <%= render 'toilets/toilet_card', toilet: toilet %>
+                </div>
               </div>
             <% end %>
         </div>
     </section>
 
 </div>
+
+<style>
+  .toilet-card {
+    width: 300px;
+    height: 15px;
+  }
+
+  @media (max-width: 576px) { /* Anpassung für Smartphones */
+    .toilet-card {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
