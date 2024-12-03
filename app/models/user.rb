@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :reviews, dependent: :destroy
+  has_many :toilets
   # Devise modules
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 

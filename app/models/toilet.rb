@@ -3,10 +3,10 @@ class Toilet < ApplicationRecord
   has_many :reviews
   has_many :toilet_categories
   has_many :categories, through: :toilet_categories
+  has_one_attached :photo
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
-
 
   # Scopes für die Filter
   scope :female_friendly, -> { where(female_friendly: true) }
@@ -20,4 +20,7 @@ class Toilet < ApplicationRecord
     return 0 if reviews.empty?
     reviews.average(:rating).to_f.round(1)
   end
+
+  # Add any validations or default values if needed
+  # validates :accessible, inclusion: { in: [true, false] }
 end
