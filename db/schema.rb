@@ -94,7 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_04_103405) do
     t.string "image_url"
     t.boolean "handicap_friendly"
     t.boolean "family_friendly", default: false
-    t.boolean "clean"
     t.text "description"
     t.boolean "paid_entry"
     t.boolean "well_located"
