@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'minigame', to: 'minigame#index'
   devise_for :users
   root to: "toilets#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
