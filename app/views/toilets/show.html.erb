@@ -1,32 +1,24 @@
 <div class="">
     <div class="container py-4">
         <a class="btn close-button" href="/" role="button"> <i class="fas fa-times" style="margin-top: 100px"></i></a>
-        <h1 class="h2 mb-3">Pergamonmuseum Toilet</h1>
+        <h1 class="h2 mb-3"><%= @toilet.name %></h1>
 
         <p class="text-muted">
-            Clean public restroom located in Pergamonmuseum. Accessible and well-maintained.
+            <%= @toilet.description %>
         </p>
 
         <div id="carouselExample" class="carousel slide">
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Smart_Toilet_Seat.jpg/800px-Smart_Toilet_Seat.jpg" class="d-block w-100" alt="...">
-            </div>
+            <% if @toilet.image_url.present? %>
+              <div class="carousel-item active">
+                <%= image_tag @toilet.image_url, class: "d-block w-100", alt: "Toilet image" %>
+              </div>
+            <% else %>
+              <div class="carousel-item active">
+                <%= image_tag "default_toilet.jpg", class: "d-block w-100", alt: "Default toilet image" %>
+              </div>
+            <% end %>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
 
         <div class="map-preview" aria-label="Location map">
