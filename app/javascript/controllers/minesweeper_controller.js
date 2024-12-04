@@ -5,8 +5,8 @@ export default class extends Controller {
 
   connect() {
     console.log("Minesweeper controller connected!")
-    this.boardSize = 10
-    this.mineCount = 10
+    this.boardSize = 8
+    this.mineCount = 8
     this.resetGame()
   }
 
