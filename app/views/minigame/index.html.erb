@@ -1,0 +1,87 @@
+<div class="container py-5" data-controller="minesweeper">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 text-center">
+      <h2 class="mb-4">Need2Pee Poopsweeper</h2>
+
+      <!-- Game Controls -->
+      <div class="game-controls mb-4">
+        <div class="d-flex justify-content-center gap-4 align-items-center bg-light p-3 rounded">
+          <div class="mines-counter" data-minesweeper-target="mineCounter">
+            💩 <span>10</span>
+          </div>
+          <button class="btn btn-primary" data-minesweeper-target="resetButton" data-action="click->minesweeper#resetGame">
+            😊
+          </button>
+        </div>
+      </div>
+
+      <!-- Game Board -->
+      <div class="game-board mb-4" style="display: inline-block; background: #ccc; padding: 10px; border-radius: 8px;">
+        <% 10.times do |row| %>
+          <div class="board-row" style="display: flex; gap: 2px; margin-bottom: 2px;">
+            <% 10.times do |col| %>
+              <div class="cell covered"
+                   style="width: 40px; height: 40px; background: #eee; border: 2px outset #fff; display: flex; justify-content: center; align-items: center; font-weight: bold; cursor: pointer;"
+                   data-minesweeper-target="cell"
+                   data-action="click->minesweeper#handleClick contextmenu->minesweeper#handleRightClick"
+                   data-row="<%= row %>"
+                   data-col="<%= col %>">
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Game Messages -->
+      <div class="mt-4">
+        <div class="alert alert-success d-none" data-minesweeper-target="winMessage">
+          Congratulations! You've found all the poops! 🎉
+        </div>
+        <div class="alert alert-danger d-none" data-minesweeper-target="loseMessage">
+          Oh no! You stepped in it! 💩
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="mt-4 text-start bg-light p-3 rounded">
+        <h4>How to Play:</h4>
+        <ul>
+          <li>Left-click to reveal a cell</li>
+          <li>Right-click to place/remove a toilet flag (🚽)</li>
+          <li>Numbers show how many poops (💩) are adjacent</li>
+          <li>Avoid the poops and mark them all with toilets to win!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .cell.uncovered {
+      background: #f8f8f8 !important;
+      border: 1px solid #ccc !important;
+    }
+
+    .cell.mine::after {
+      content: "💩";
+      font-size: 1.2em;
+    }
+
+    .cell.flagged::after {
+      content: "🚽";
+      font-size: 1.2em;
+    }
+
+    .cell.covered:hover {
+      background: #e0e0e0 !important;
+    }
+
+    .number-1 { color: #2196F3; }
+    .number-2 { color: #4CAF50; }
+    .number-3 { color: #f44336; }
+    .number-4 { color: #9C27B0; }
+    .number-5 { color: #795548; }
+    .number-6 { color: #607D8B; }
+    .number-7 { color: #000000; }
+    .number-8 { color: #757575; }
+  </style>
+</div>

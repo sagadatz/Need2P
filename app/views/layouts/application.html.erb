@@ -12,55 +12,56 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
   </head>
 
-  <body><%= render "shared/navbar" %>
-    <!-- Hamburger-Button (Jetzt benutzt dein fa-bars-Icon) -->
+  <body>
+    <%= render "shared/navbar" %>
+
+    <!-- Hamburger-Button -->
     <span class="open-btn" onclick="openSidebar()">&#9776;</span>
 
     <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
-        <a href="/">Home</a>
-        <a href="#">About</a>
-        <a href="#">Report Issue</a>
+      <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+      <a href="/">Home</a>
+      <a href="/minigame"><i class="fas fa-gamepad me-2"></i>Minigame</a>
+      <a href="#">About</a>
+      <a href="#">Report Issue</a>
     </div>
 
     <!-- Overlay -->
     <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
 
-    <!-- Hauptinhalt -->
-    <div id="mainContent" class="content">
-      <header class="navbar navbar-custom text-white py-3">
-        <div class="container-fluid d-flex justify-content-end align-items-center">
-          <!-- Profil Icon auf der rechten Seite -->
-          <%= link_to dashboard_path do  %>
-            <button class="btn btn-link text-white">
-                <i class="fas fa-user"></i>
-            </button>
-          <% end %>
-        </div>
-      </header>
+    <!-- Header -->
+    <header class="navbar navbar-custom text-white py-3">
+      <div class="container-fluid d-flex justify-content-end align-items-center">
+        <%= link_to dashboard_path do  %>
+          <button class="btn btn-link text-white">
+            <i class="fas fa-user"></i>
+          </button>
+        <% end %>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <%= render "shared/flashes" %>
+
+    <div class="main-container" style="margin-left: 0; transition: margin-left 0.5s;">
+      <%= yield %>
     </div>
 
     <script>
-        function openSidebar() {
-            document.getElementById("mySidebar").classList.add("open");
-            document.getElementById("mainContent").style.marginLeft = "250px";
-            document.getElementById("overlay").classList.add("open");
-        }
+      function openSidebar() {
+        document.getElementById("mySidebar").classList.add("open");
+        document.querySelector(".main-container").style.marginLeft = "250px";
+        document.getElementById("overlay").classList.add("open");
+      }
 
-        function closeSidebar() {
-            document.getElementById("mySidebar").classList.remove("open");
-            document.getElementById("mainContent").style.marginLeft = "0";
-            document.getElementById("overlay").classList.remove("open");
-        }
+      function closeSidebar() {
+        document.getElementById("mySidebar").classList.remove("open");
+        document.querySelector(".main-container").style.marginLeft = "0";
+        document.getElementById("overlay").classList.remove("open");
+      }
     </script>
-
-    <%= render "shared/flashes" %>
-
-    <%= yield %>
   </body>
-
 </html>
