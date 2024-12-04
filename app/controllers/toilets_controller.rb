@@ -5,10 +5,14 @@ class ToiletsController < ApplicationController
 
   def create
     @toilet = Toilet.new(toilet_params)
+    @toilet.user = current_user
+    @toilet.name = params[:toilet][:name].presence || "Public Toilet"
+    @toilet.location = params[:toilet][:address]
+
     if @toilet.save
-      redirect_to toilet_path(@toilet), notice: 'Toilet added successfully.'
+      redirect_to toilets_path, notice: 'Toilet added successfully.'
     else
-      render :new, alert: 'Error adding toilet.'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -85,14 +89,16 @@ class ToiletsController < ApplicationController
       :description,
       :latitude,
       :longitude,
-      :image,
+      :photo,
+      :address,
       :female_friendly,
       :handicap_friendly,
       :family_friendly,
       :clean,
       :accessible,
-      :paid,
-      :rating
+      :paid_entry,
+      :well_located,
+      :location
     )
   end
 end
