@@ -1,114 +1,143 @@
     <div class="modal-sheet">
     <div class="container py-4">
-        <!-- Close Buttons -->
-        <button class="close-button" aria-label="Close">
+        <a class="btn close-button" href="/" role="button">
             <i class="fas fa-times"></i>
-        </button>
-        <button class="close-button" aria-label="Close" onclick="window.location.href='/toilets'">
-            <i class="fas fa-times"></i>
-        </button>
+        </a>
+        <h1 class="h2 mb-4">Add New Toilet</h1>
 
-        <form class="mt-3">
+        <%= simple_form_for @toilet do |f| %>
+            <!-- Name -->
             <div class="mb-4">
-                <input
-                    type="text"
-                    class="form-control form-control-lg"
-                    placeholder="Name of the toilet"
-                    aria-label="Toilet name"
-                    required
-                >
+                <%= f.input :name,
+                            input_html: { class: "form-control" },
+                            placeholder: "Give this toilet a name (optional)",
+                            label: false %>
             </div>
 
+            <!-- Address Autocomplete -->
+            <div class="mb-4"
+                data-controller="address-autocomplete"
+                data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+                <%= f.input :address,
+                            input_html: {
+                              data: {
+                                address_autocomplete_target: "address"
+                              },
+                              class: "d-none"
+                            },
+                            wrapper_html: { class: "mb-3" } %>
+                <%= f.input :latitude,
+                            input_html: {
+                              data: {
+                                address_autocomplete_target: "latitude"
+                              },
+                              class: "d-none"
+                            },
+                            wrapper_html: { class: "d-none" } %>
+                <%= f.input :longitude,
+                            input_html: {
+                              data: {
+                                address_autocomplete_target: "longitude"
+                              },
+                              class: "d-none"
+                            },
+                            wrapper_html: { class: "d-none" } %>
+            </div>
+
+            <!-- Map Preview -->
+            <div class="map-preview mb-4">
+                <div style="width: 100%; height: 200px;"
+                    data-controller="map"
+                    data-map-markers-value="[]"
+                    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+                    data-map-source-value="new">
+                </div>
+            </div>
+
+            <!-- Description -->
             <div class="mb-4">
-                <textarea
-                    class="form-control"
-                    placeholder="Write your description here..."
-                    aria-label="Toilet description"
-                ></textarea>
+                <%= f.input :description,
+                            input_html: { class: "form-control" },
+                            placeholder: "Write your description here...",
+                            label: false %>
             </div>
 
-            <div class="map-preview mb-3" aria-label="Location map">
-                <!-- Map will be integrated here -->
-            </div>
-
-            <button type="button" class="btn btn-primary w-100 mb-4">
-                Add Address
-            </button>
-
-            <h1>Add New Toilet</h1>
-
-            <div class="feature-checkboxes">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="clean">
-                    <label class="form-check-label" for="clean">Clean</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="dirty">
-                    <label class="form-check-label" for="dirty">Dirty</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="accessible">
-                    <label class="form-check-label" for="accessible">Accessible</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="paid-entry">
-                    <label class="form-check-label" for="paid-entry">Paid Entry</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="female-friendly">
-                    <label class="form-check-label" for="female-friendly">Female-Friendly</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="well-located">
-                    <label class="form-check-label" for="well-located">Well Located</label>
+            <!-- Photo Upload -->
+            <div class="mb-4">
+                <%= f.input :photo,
+                           as: :file,
+                           input_html: {
+                             class: "form-control",
+                             accept: 'image/*',
+                             data: {
+                               action: "change->preview#updatePreview",
+                               preview_target: "input"
+                             }
+                           },
+                           label: "Add Photos" %>
+                <div class="mt-2" data-controller="preview">
+                    <img data-preview-target="output" class="img-preview d-none">
                 </div>
             </div>
 
-            <label class="photo-upload-button w-100 mb-4" for="photo-upload">
-                Add Photos
-                <input
-                    type="file"
-                    id="photo-upload"
-                    class="d-none"
-                    accept="image/*"
-                    multiple="true"
-                    aria-label="Upload photos"
-                    onchange="previewPhotos(event)"
-                >
-            </label>
+            <!-- Features -->
+            <div class="feature-checkboxes mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <%= f.input :female_friendly, as: :boolean %>
+                        <%= f.input :handicap_friendly, as: :boolean %>
+                        <%= f.input :family_friendly, as: :boolean %>
+                    </div>
+                    <div class="col-6">
+                        <%= f.input :clean, as: :boolean %>
+                        <%= f.input :paid_entry, as: :boolean %>
+                        <%= f.input :well_located, as: :boolean %>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Container for Photo Previews -->
-            <div id="photo-previews" class="d-flex flex-wrap gap-2 mb-4"></div>
-
-            <button type="submit" class="btn btn-primary w-100">
-                Upload
-            </button>
-        </form>
+            <%= f.submit "Add Toilet", class: "btn btn-primary w-100" %>
+        <% end %>
     </div>
-  </div>
+</div>
 
-<script>
-    function previewPhotos(event) {
-        const files = event.target.files; // Get selected files
-        const previewContainer = document.getElementById('photo-previews');
-        previewContainer.innerHTML = ''; // Clear existing previews
+<style>
+  .modal-sheet {
+    background: white;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+  }
 
-        Array.from(files).forEach((file) => {
-            if (!file.type.startsWith('image/')) return;
+  .close-button {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                // Create an image element for preview
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = file.name;
-                img.style.width = '100px';
-                img.style.height = '100px';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = '8px';
-                previewContainer.appendChild(img);
-            };
-            reader.readAsDataURL(file); // Read the file as a data URL
-        });
-    }
-</script>
+  .feature-checkboxes .form-check {
+    margin-bottom: 1rem;
+  }
+
+  /* Mapbox Geocoder Customization */
+  .mapboxgl-ctrl-geocoder {
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Image Preview Styles */
+  .img-preview {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+</style>
