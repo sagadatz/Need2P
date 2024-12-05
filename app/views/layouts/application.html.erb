@@ -13,6 +13,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css' rel='stylesheet' type='text/css' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -35,8 +36,15 @@
 
     <!-- Header -->
     <header class="navbar navbar-custom text-white py-3">
-      <div class="container-fluid d-flex justify-content-end align-items-center">
-        <%= link_to dashboard_path do  %>
+      <div class="container-fluid d-flex justify-content-between align-items-center">
+        <!-- Hamburger-Button -->
+        <span class="open-btn" onclick="openSidebar()">&#9776;</span>
+
+        <!-- Title -->
+        <h1 class="mb-0 h3 text-center flex-grow-1" style="font-family: 'Anton SC', sans-serif; font-size: 30px;">NEED2P</h1>
+
+        <!-- Profile Icon -->
+        <%= link_to dashboard_path do %>
           <button class="btn btn-link text-white">
             <i class="fas fa-user"></i>
           </button>
