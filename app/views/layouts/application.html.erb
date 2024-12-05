@@ -6,6 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Favicon -->
+    <%= favicon_link_tag 'poop_icon.png' %>
+
+    <!-- iOS Icons -->
+    <%= favicon_link_tag 'poop_icon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+    <%= favicon_link_tag 'poop_icon.png', rel: 'apple-touch-icon', sizes: '152x152', type: 'image/png' %>
+    <%= favicon_link_tag 'poop_icon.png', rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png' %>
+    <%= favicon_link_tag 'poop_icon.png', rel: 'apple-touch-icon', sizes: '167x167', type: 'image/png' %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
