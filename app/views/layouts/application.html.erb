@@ -49,8 +49,10 @@
         <!-- Hamburger-Button -->
         <span class="open-btn" onclick="openSidebar()">&#9776;</span>
 
-        <!-- Title -->
-        <h1 class="mb-0 h3 text-center flex-grow-1" style="font-family: 'Anton SC', sans-serif; font-size: 30px;">NEED2P</h1>
+        <!-- Title with Link -->
+        <%= link_to toilets_path, class: "text-decoration-none text-white" do %>
+          <h1 class="mb-0 h3 text-center flex-grow-1" style="font-family: 'Anton SC', sans-serif; font-size: 30px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">NEED2P</h1>
+        <% end %>
 
         <!-- Profile Icon -->
         <%= link_to dashboard_path do %>
